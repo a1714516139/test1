@@ -1,0 +1,207 @@
+/* ================================================================
+   AI Resume Analyzer — Clean Single-Page Design
+   ================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --primary: #4f46e5;
+    --primary-light: #eef2ff;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --bg: #f0f2f5;
+    --surface: #ffffff;
+    --border: #e5e7eb;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --radius: 16px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                 "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ---- Header ---- */
+.header {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: #fff;
+    text-align: center;
+    padding: 2.5rem 1rem;
+}
+.header h1 { font-size: 1.6rem; font-weight: 700; }
+.header .subtitle { font-size: 0.95rem; opacity: 0.85; margin-top: 0.3rem; }
+
+/* ---- Container ---- */
+.container { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+/* ---- Card ---- */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+/* ---- Upload ---- */
+.upload-card { text-align: center; }
+
+.upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 3rem 2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #fafbfc;
+}
+.upload-zone:hover,
+.upload-zone.drag-over { border-color: var(--primary); background: var(--primary-light); }
+
+.upload-icon { font-size: 3rem; margin-bottom: 0.75rem; }
+.upload-title { font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 0.25rem; }
+.upload-hint { font-size: 0.85rem; color: var(--text-muted); }
+
+/* ---- File bar ---- */
+.file-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+}
+.file-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+.btn-reset {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: inherit;
+}
+.btn-reset:hover { color: var(--danger); }
+
+/* ---- Progress ---- */
+.progress-bar { margin-top: 1rem; }
+.progress-track {
+    height: 6px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    width: 60%;
+    background: var(--primary);
+    border-radius: 99px;
+    animation: progress-pulse 1.5s ease-in-out infinite;
+}
+@keyframes progress-pulse {
+    0%, 100% { width: 20%; }
+    50% { width: 90%; }
+}
+.progress-text {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* ---- Result Grid ---- */
+.result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+}
+
+.result-card { padding: 1.5rem; }
+
+.result-card h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* ---- Field list ---- */
+.field-list { display: flex; flex-direction: column; gap: 0.85rem; }
+
+.field-item {}
+.field-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.15rem;
+}
+.field-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    word-break: break-word;
+}
+.field-value.empty { color: var(--text-muted); font-weight: 400; font-style: italic; }
+
+/* ---- Sub-list (skills, education, projects) ---- */
+.sub-list { margin-top: 0.3rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.sub-tag {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.2rem 0.65rem;
+    border-radius: 99px;
+}
+.sub-item {
+    font-size: 0.85rem;
+    color: var(--text);
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.sub-item:last-child { border-bottom: none; }
+
+/* ---- Error ---- */
+.error-box {
+    margin-top: 1.25rem;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--danger);
+    font-size: 0.9rem;
+}
+
+/* ---- Footer ---- */
+.footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .result-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.3rem; }
+    .card { padding: 1.25rem; }
+}
