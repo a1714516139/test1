@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 智能简历分析系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <h1>📄 AI 智能简历分析系统</h1>
+        <p class="subtitle">上传 PDF 简历，自动提取关键信息</p>
+    </header>
+
+    <main class="container">
+
+        <!-- Upload -->
+        <section class="card upload-card" id="section-upload">
+            <div class="upload-zone" id="upload-zone">
+                <div class="upload-icon">📁</div>
+                <p class="upload-title">点击上传或拖拽 PDF 简历到此处</p>
+                <p class="upload-hint">支持多页 PDF，最大 10MB</p>
+                <input type="file" id="file-input" accept=".pdf" hidden>
+            </div>
+
+            <div class="file-bar" id="file-bar" style="display:none;">
+                <span class="file-name" id="file-name"></span>
+                <button class="btn-reset" id="btn-reset">重新选择</button>
+            </div>
+
+            <div class="progress-bar" id="progress-bar" style="display:none;">
+                <div class="progress-track">
+                    <div class="progress-fill"></div>
+                </div>
+                <p class="progress-text" id="progress-text">正在解析简历...</p>
+            </div>
+        </section>
+
+        <!-- Results -->
+        <div class="result-grid" id="result-grid" style="display:none;">
+
+            <!-- Card 1: 基本信息 -->
+            <section class="card result-card" id="card-basic">
+                <h2>📋 基本信息</h2>
+                <div class="field-list" id="fields-basic"></div>
+            </section>
+
+            <!-- Card 2: 求职信息 -->
+            <section class="card result-card" id="card-job">
+                <h2>🎯 求职信息</h2>
+                <div class="field-list" id="fields-job"></div>
+            </section>
+
+            <!-- Card 3: 背景信息 -->
+            <section class="card result-card" id="card-bg">
+                <h2>📚 背景信息</h2>
+                <div class="field-list" id="fields-bg"></div>
+            </section>
+
+        </div>
+
+        <!-- Error -->
+        <div class="error-box" id="error-box" style="display:none;">
+            <span class="error-icon">❌</span>
+            <span id="error-text"></span>
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p>AI Resume Analyzer v2.0 · Powered by LLM</p>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
